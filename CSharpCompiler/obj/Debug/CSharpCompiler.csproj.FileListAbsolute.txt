@@ -1,7 +1,0 @@
-C:\development\CSharpCompiler\CSharpCompiler\bin\Debug\CSharpCompiler.exe.config
-C:\development\CSharpCompiler\CSharpCompiler\bin\Debug\CSharpCompiler.exe
-C:\development\CSharpCompiler\CSharpCompiler\bin\Debug\CSharpCompiler.pdb
-C:\development\CSharpCompiler\CSharpCompiler\obj\Debug\CSharpCompiler.csprojAssemblyReference.cache
-C:\development\CSharpCompiler\CSharpCompiler\obj\Debug\CSharpCompiler.csproj.CoreCompileInputs.cache
-C:\development\CSharpCompiler\CSharpCompiler\obj\Debug\CSharpCompiler.exe
-C:\development\CSharpCompiler\CSharpCompiler\obj\Debug\CSharpCompiler.pdb
