@@ -1,10 +1,8 @@
-using System;
+﻿using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompilerTest
 {
@@ -12,20 +10,20 @@ namespace CompilerTest
     {
         public static void Main(string[] args)
         {
-            string filesToCompileDirectory = @"C:\Development\codetocompile";
+            string filesToCompileDirectory = @"C:\development\codetocompile";
 
             //Get all the files in the directory
             DirectoryInfo directory = new DirectoryInfo(filesToCompileDirectory);
             FileInfo[] files = directory.GetFiles("*.cs");
             IList<String> fileNames = new List<String>();
 
-            if(files.Length <= 0)
+            if (files.Length <= 0)
             {
                 System.Console.WriteLine("No files to compile. Quitting.");
                 return;
             }
-
-            foreach(FileInfo fileObj in files)
+            
+            foreach (FileInfo fileObj in files)
             {
                 fileNames.Add(filesToCompileDirectory + @"\" + fileObj.Name);
             }
@@ -33,7 +31,7 @@ namespace CompilerTest
             bool isCompiledWithoutErrors = false;
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
 
-            if(provider == null)
+            if (provider == null)
             {
                 System.Console.WriteLine("CodeDomeProvider.CreateProvider returned null object.");
                 return;
@@ -48,6 +46,7 @@ namespace CompilerTest
 
             // Save the assembly as a physical file.
             compParams.GenerateInMemory = false;
+            compParams.CompilerOptions += "/recurse:" + filesToCompileDirectory + System.IO.Path.DirectorySeparatorChar + "*.cs";
 
             // Set whether to treat all warnings as errors.
             compParams.TreatWarningsAsErrors = false;
