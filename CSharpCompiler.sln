@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCompiler", "CSharpCompiler\CSharpCompiler.csproj", "{C7B2408F-52AF-4061-9C41-6B9B723BFFBA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompilerProgram", "CSharpCompiler\CompilerProgram.csproj", "{C7B2408F-52AF-4061-9C41-6B9B723BFFBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolingPackage", "ToolingPackage\ToolingPackage.csproj", "{591CF6E1-52FE-4F52-AABA-852A50FFA8EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C7B2408F-52AF-4061-9C41-6B9B723BFFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7B2408F-52AF-4061-9C41-6B9B723BFFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7B2408F-52AF-4061-9C41-6B9B723BFFBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{591CF6E1-52FE-4F52-AABA-852A50FFA8EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{591CF6E1-52FE-4F52-AABA-852A50FFA8EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{591CF6E1-52FE-4F52-AABA-852A50FFA8EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{591CF6E1-52FE-4F52-AABA-852A50FFA8EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
