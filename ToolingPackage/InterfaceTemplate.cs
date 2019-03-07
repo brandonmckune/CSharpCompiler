@@ -105,7 +105,7 @@ namespace ToolingPackage
             sb.AppendLine(Constants.BEGIN_CODE_BLOCK);
 
             //INTERFACE Begin
-            sb.Append(Extensions.AccessModifier.Public.ToLower() + Constants.SPACE + Constants.INTERFACE + Constants.SPACE + this.Name);
+            sb.Append(Constants.AccessModifier.Public.ToString().ToLower() + Constants.SPACE + Constants.INTERFACE + Constants.SPACE + this.Name);
 
             if (this.IneritedInterfaces.Count > 0)
             {
@@ -126,7 +126,7 @@ namespace ToolingPackage
             foreach (KeyValuePair<string, string> property in this.Properties)
             {
                 sb.AppendLine(
-                    Extensions.AccessModifier.Public.ToLower() + Constants.SPACE + property.Value + Constants.SPACE + property.Key + Constants.PROPERTY_BODY);
+                    Constants.AccessModifier.Public.ToString().ToLower() + Constants.SPACE + property.Value + Constants.SPACE + property.Key + Constants.PROPERTY_BODY);
 
                 sb.AppendLine(string.Empty);
             }

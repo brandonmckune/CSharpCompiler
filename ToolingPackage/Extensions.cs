@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace ToolingPackage
 {
     public static class Extensions
     {
-        public enum AccessModifier { Public, Protected, Private }
-
-        public static string ToLower(this AccessModifier accessModifier)
+        public static string RemoveSpaces(this string str)
         {
-            return accessModifier.ToString().ToLower();
+            return Regex.Replace(str, @"\s+", string.Empty);
         }
-        
+        public static string FirstCharToUpper(this string input)
+        {
+            switch (input)
+            {
+                case null: throw new ArgumentNullException(nameof(input));
+                case "": throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input));
+                default: return input.First().ToString().ToUpper() + input.Substring(1);
+            }
+        }
     }
 }

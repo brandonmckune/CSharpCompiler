@@ -42,7 +42,7 @@ namespace ToolingPackageTests
         public void TestFunctionTemplateEqualsDefinition()
         {
             _template.SetName("Name1")
-                .SetAccessModifier(Extensions.AccessModifier.Public)
+                .SetAccessModifier(Constants.AccessModifier.Public)
                 .SetReturnType("string");
 
             SortedList<string, string> parameters = new SortedList<string, string>();
@@ -51,7 +51,7 @@ namespace ToolingPackageTests
             _template.SetParameters(parameters);
 
             FunctionTemplate template = new FunctionTemplate("Name1")
-                .SetAccessModifier(Extensions.AccessModifier.Public)
+                .SetAccessModifier(Constants.AccessModifier.Public)
                 .SetReturnType("string")
                 .SetParameters(parameters);
 
@@ -73,7 +73,7 @@ namespace ToolingPackageTests
             parameters.Add("name", "string");
 
             _template.SetName("TestFunction")
-                .SetAccessModifier(Extensions.AccessModifier.Public)
+                .SetAccessModifier(Constants.AccessModifier.Public)
                 .SetReturnType("void")
                 .SetBody(functionBody)
                 .SetParameters(parameters);

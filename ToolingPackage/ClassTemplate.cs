@@ -8,18 +8,18 @@ namespace ToolingPackage
     {
         private IList<string> _usingPaths;
         private string _name = string.Empty;
-        private Extensions.AccessModifier _accesModifier = Extensions.AccessModifier.Public;
+        private Constants.AccessModifier _accesModifier = Constants.AccessModifier.Public;
         private string _inheritedClass = string.Empty;
         private IList<string> _inheritedInterfaces;
-        private SortedList<string, string> _properties;
+        private IList<PropertyTemplate> _properties;
         private IList<FunctionTemplate> _functions;
 
         public IList<string> UsingPaths { get => this._usingPaths; }
         public string Name { get => this._name; }
-        public Extensions.AccessModifier AccessModifier { get => this._accesModifier; }
+        public Constants.AccessModifier AccessModifier { get => this._accesModifier; }
         public string InheritedClass { get => this._inheritedClass; }
         public IList<string> IneritedInterfaces { get => this._inheritedInterfaces; }
-        public SortedList<string, string> Properties { get => this._properties; }
+        public IList<PropertyTemplate> Properties { get => this._properties; }
         public IList<FunctionTemplate> Functions { get => this._functions; }
 
         public ClassTemplate() { }
@@ -39,11 +39,11 @@ namespace ToolingPackage
 
         public ClassTemplate SetClassName(string className)
         {
-            this._name = Regex.Replace(className, @"\s+", string.Empty);
+            this._name = className;
             return this;
         }
 
-        public ClassTemplate SetScope(Extensions.AccessModifier scope)
+        public ClassTemplate SetScope(Constants.AccessModifier scope)
         {
             this._accesModifier = scope;
             return this;
@@ -73,25 +73,21 @@ namespace ToolingPackage
             return this;
         }
 
-        public ClassTemplate AddProperty(string propertyName, string propertyType)
+        public ClassTemplate AddProperty(PropertyTemplate property)
         {
-            if (this._properties.ContainsKey(propertyName))
+            if (!this._properties.Contains(property))
             {
-                this._properties[propertyName] = propertyType;
-            }
-            else
-            {
-                this._properties.Add(propertyName, propertyType);
+                this._properties.Add(property);
             }
 
             return this;
         }
 
-        public ClassTemplate AddProperties(SortedList<string, string> properties)
+        public ClassTemplate AddProperties(IList<PropertyTemplate> properties)
         {
-            foreach(KeyValuePair<string, string> kvp in properties)
+            foreach(PropertyTemplate property in properties)
             {
-                this.AddProperty(kvp.Key, kvp.Value);
+                this.AddProperty(property);
             }
 
             return this;
@@ -140,7 +136,7 @@ namespace ToolingPackage
             sb.AppendLine(Constants.BEGIN_CODE_BLOCK);
 
             //Class Begin
-            sb.Append(this.AccessModifier.ToLower() + Constants.SPACE + Constants.CLASS + Constants.SPACE + this.Name);
+            sb.Append(this.AccessModifier.ToString().ToLower() + Constants.SPACE + Constants.CLASS + Constants.SPACE + this.Name);
 
             if (this.InheritedClass.Length > 0)
             {
@@ -164,16 +160,22 @@ namespace ToolingPackage
             sb.AppendLine(Constants.BEGIN_CODE_BLOCK);
             sb.AppendLine(string.Empty);
 
-            //Basic Property definitions
-            //TODO: Make this better with setters returning the object for chaining.
-            foreach(KeyValuePair<string, string> property in this.Properties)
+            //Private Property Definitions
+            foreach(PropertyTemplate property in this.Properties)
             {
-                sb.AppendLine(
-                    Extensions.AccessModifier.Public.ToLower() + Constants.SPACE + property.Value + Constants.SPACE + property.Key + Constants.PROPERTY_BODY);
-
-                sb.AppendLine(string.Empty);
+                sb.AppendLine(property.PrintPrivateProperty());
             }
 
+            foreach (PropertyTemplate property in this.Properties)
+            {
+                sb.AppendLine(property.PrintPropertyWithGetSet());
+            }
+
+            foreach (PropertyTemplate property in this.Properties)
+            {
+                sb.AppendLine(property.PrintSetterFunction(this.Name));
+            }
+            
             //Functions
             foreach(FunctionTemplate function in this.Functions)
             {
