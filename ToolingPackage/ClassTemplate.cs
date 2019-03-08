@@ -28,12 +28,24 @@ namespace ToolingPackage
             this.SetClassName(className);
         }
 
-        public ClassTemplate AddUsingPath(string path)
+        public ClassTemplate SetUsingPath(string path)
         {
+            this._usingPaths = this._usingPaths ?? new List<string>();
+
             if (!this._usingPaths.Contains(path))
             {
                 this._usingPaths.Add(path);
             }
+            return this;
+        }
+
+        public ClassTemplate SetUsingPaths(IList<string> usingPaths)
+        {
+            foreach(string path in usingPaths)
+            {
+                this.SetUsingPath(path);
+            }
+
             return this;
         }
 
@@ -55,7 +67,7 @@ namespace ToolingPackage
             return this;
         }
 
-        public ClassTemplate AddInheritedInterface(string inheritedInterface)
+        public ClassTemplate SetInheritedInterface(string inheritedInterface)
         {
             this._inheritedInterfaces = this._inheritedInterfaces ?? new List<string>();
 
@@ -69,12 +81,18 @@ namespace ToolingPackage
 
         public ClassTemplate SetInheritedInterfaces(IList<string> inheritedInterfaces)
         {
-            this._inheritedInterfaces = inheritedInterfaces;
+            foreach( string inheritedInterface in inheritedInterfaces)
+            {
+                this.SetInheritedInterface(inheritedInterface);
+            }
+
             return this;
         }
 
-        public ClassTemplate AddProperty(PropertyTemplate property)
+        public ClassTemplate SetProperty(PropertyTemplate property)
         {
+            this._properties = this._properties ?? new List<PropertyTemplate>();
+
             if (!this._properties.Contains(property))
             {
                 this._properties.Add(property);
@@ -83,18 +101,20 @@ namespace ToolingPackage
             return this;
         }
 
-        public ClassTemplate AddProperties(IList<PropertyTemplate> properties)
+        public ClassTemplate SetProperties(IList<PropertyTemplate> properties)
         {
             foreach(PropertyTemplate property in properties)
             {
-                this.AddProperty(property);
+                this.SetProperty(property);
             }
 
             return this;
         }
 
-        public ClassTemplate AddFunction(FunctionTemplate function)
+        public ClassTemplate SetFunction(FunctionTemplate function)
         {
+            this._functions = this._functions ?? new List<FunctionTemplate>();
+
             if(!this._functions.Contains(function))
             {
                 this._functions.Add(function);
@@ -103,11 +123,11 @@ namespace ToolingPackage
             return this;
         }
 
-        public ClassTemplate AddFunctions(IList<FunctionTemplate> functions)
+        public ClassTemplate SetFunctions(IList<FunctionTemplate> functions)
         {
             foreach(FunctionTemplate function in functions)
             {
-                this.AddFunction(function);
+                this.SetFunction(function);
             }
 
             return this;
@@ -138,6 +158,7 @@ namespace ToolingPackage
             //Class Begin
             sb.Append(this.AccessModifier.ToString().ToLower() + Constants.SPACE + Constants.CLASS + Constants.SPACE + this.Name);
 
+            //Inheritance begins
             if (this.InheritedClass.Length > 0)
             {
                 hasPreviousInheritance = true;
@@ -151,7 +172,7 @@ namespace ToolingPackage
                 bool isFirstRun = true;
                 foreach(string intrface in this.IneritedInterfaces)
                 {
-                    sb.Append(isFirstRun ? string.Empty : Constants.COMMA + intrface);
+                    sb.Append((isFirstRun ? string.Empty : Constants.COMMA) + intrface);
                     isFirstRun = false;
                 }
             }

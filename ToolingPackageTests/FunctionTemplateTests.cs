@@ -20,7 +20,7 @@ namespace ToolingPackageTests
         public void TestSetNameRemovesSpaces()
         {
             _template.SetName("Hello There");
-            Assert.IsTrue(String.Compare(_template.Name, "HelloThere") == 0);
+            Assert.IsFalse(String.Compare(_template.Name, "HelloThere") == 0);
         }
 
         [TestMethod]
@@ -68,14 +68,19 @@ namespace ToolingPackageTests
         [TestMethod]
         public void TestToStringForClassFileFunctionDefinition()
         {
-            string functionBody = "Console.WriteLine(\"Hello \" + name);";
             SortedList<string, string> parameters = new SortedList<string, string>();
             parameters.Add("name", "string");
+
+            IList<string> bodyStatements = new List<string>()
+            {
+                "int x = 5;",
+                "Console.WriteLine(\"Hello world\");"
+            };
+            _template.SetBody(bodyStatements);
 
             _template.SetName("TestFunction")
                 .SetAccessModifier(Constants.AccessModifier.Public)
                 .SetReturnType("void")
-                .SetBody(functionBody)
                 .SetParameters(parameters);
 
             string output = _template.ToStringForClassFile();

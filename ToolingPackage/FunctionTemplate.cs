@@ -126,6 +126,7 @@ namespace ToolingPackage
             {
                 sb.Append(firstTimeThrough ? string.Empty : Constants.COMMA);
                 sb.Append(kvp.Value + Constants.SPACE + kvp.Key);
+                firstTimeThrough = false;
             }
             sb.AppendLine(Constants.CLOSE_PARENTHESIS + Constants.BEGIN_CODE_BLOCK);
 

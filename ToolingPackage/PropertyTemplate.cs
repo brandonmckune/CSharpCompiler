@@ -67,7 +67,7 @@ namespace ToolingPackage
             if(this.AccessModifier == Constants.AccessModifier.Private)
                 return sb.ToString();
 
-            sb.Append(this.AccessModifier + Constants.SPACE + className + Constants.SPACE + Constants.SET.FirstCharToUpper() + this.Name);
+            sb.Append(this.AccessModifier.ToString().ToLower() + Constants.SPACE + className + Constants.SPACE + Constants.SET.FirstCharToUpper() + this.Name);
             sb.Append(Constants.OPEN_PARENTHESIS + Constants.SPACE);
             
             switch (this.ContainerType)
@@ -146,7 +146,7 @@ namespace ToolingPackage
             string privatePropertyName = Constants.PRIVATE_MEMBER + this.Name.ToLower();
 
             sb.Append(Constants.GET + Constants.SPACE + Constants.ARROW + Constants.SPACE + Constants.THIS + Constants.PERIOD + privatePropertyName + Constants.SEMICOLON);
-            sb.Append(Constants.SET + Constants.SPACE + Constants.ARROW + Constants.SPACE + Constants.THIS + Constants.PERIOD + privatePropertyName + Constants.SEMICOLON + Constants.EQUALS + Constants.VALUE + Constants.SEMICOLON);
+            sb.Append(Constants.SET + Constants.SPACE + Constants.ARROW + Constants.SPACE + Constants.THIS + Constants.PERIOD + privatePropertyName + Constants.EQUALS + Constants.VALUE + Constants.SEMICOLON);
             sb.AppendLine(Constants.SPACE + Constants.END_CODE_BLOCK);
 
             return sb.ToString();
