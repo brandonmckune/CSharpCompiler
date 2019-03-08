@@ -49,6 +49,8 @@ namespace ToolingPackage
 
         public InterfaceTemplate AddProperty(string propertyName, string propertyType)
         {
+            this._properties = this._properties ?? new SortedList<string, string>();
+
             if (this._properties.ContainsKey(propertyName))
             {
                 this._properties[propertyName] = propertyType;
@@ -73,6 +75,8 @@ namespace ToolingPackage
 
         public InterfaceTemplate AddFunction(FunctionTemplate function)
         {
+            this._functions = this._functions ?? new List<FunctionTemplate>();
+
             if (!this._functions.Contains(function))
             {
                 this._functions.Add(function);

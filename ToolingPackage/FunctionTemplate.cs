@@ -33,7 +33,7 @@ namespace ToolingPackage
 
         public FunctionTemplate SetName(string name)
         {
-            this._name = Regex.Replace(name, @"\s+", string.Empty);
+            this._name = name;
             return this;
         }
 
