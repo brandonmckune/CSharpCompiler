@@ -50,6 +50,7 @@
     <Compile Include="InterfaceTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyTemplate.cs" />
+    <Compile Include="SimpleCSCompiler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

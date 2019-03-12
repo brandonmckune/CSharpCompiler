@@ -13,17 +13,23 @@ namespace CompilerTest
         {
             string filesToCompileDirectory = @"C:\development\codetocompile";
 
-            ToolingPackage.Compiler compiler =
-                new ToolingPackage.Compiler()
-                .WithCodeFileDirectory(filesToCompileDirectory)
-                .WithAssemblies(new List<String>() { "System.dll" })
-                .SetupCompiler()
-                .CompileBinaries();
+            //ToolingPackage.Compiler compiler =
+            //    new ToolingPackage.Compiler()
+            //    .WithCodeFileDirectory(filesToCompileDirectory)
+            //    .WithAssemblies(new List<String>() { "System.dll" })
+            //    .SetupCompiler()
+            //    .CompileBinaries();
+
+            ToolingPackage.SimpleCSCompiler compiler =
+                new ToolingPackage.SimpleCSCompiler()
+                .SetTopSourceDirectory(filesToCompileDirectory)
+                .SetAssemblies(new List<String>() { "System.dll" })
+                .CompileAssembly();
 
             if (compiler.DidCompile)
             {
                 System.Console.WriteLine("Compilation completed.");
-                System.Console.WriteLine("Created: " + compiler.DLLOutputAssemblyName);
+                System.Console.WriteLine("Created: " + compiler.OutputAssemblyName);
             }
             else
             {
@@ -37,7 +43,7 @@ namespace CompilerTest
             System.Console.ReadKey();
 
 
-            var DLL = Assembly.LoadFile(System.IO.Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + compiler.DLLOutputAssemblyName);
+            var DLL = Assembly.LoadFile(System.IO.Directory.GetCurrentDirectory() + System.IO.Path.DirectorySeparatorChar + compiler.OutputAssemblyName);
 
             foreach (Type type in DLL.GetExportedTypes())
             {
