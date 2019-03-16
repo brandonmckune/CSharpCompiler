@@ -12,14 +12,7 @@ namespace CompilerTest
         public static void Main(string[] args)
         {
             string filesToCompileDirectory = @"C:\development\codetocompile";
-
-            //ToolingPackage.Compiler compiler =
-            //    new ToolingPackage.Compiler()
-            //    .WithCodeFileDirectory(filesToCompileDirectory)
-            //    .WithAssemblies(new List<String>() { "System.dll" })
-            //    .SetupCompiler()
-            //    .CompileBinaries();
-
+            
             ToolingPackage.SimpleCSCompiler compiler =
                 new ToolingPackage.SimpleCSCompiler()
                 .SetTopSourceDirectory(filesToCompileDirectory)
